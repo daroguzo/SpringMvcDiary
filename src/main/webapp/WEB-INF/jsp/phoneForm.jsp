@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Account Menu</title>
+    <title>전화번호 변경</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,22 +42,26 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">Account Menu</h1>
                 <c:if test="${sessionScope.id == null}">
-                    <h3 class="mb-5">로그인부터 해주세요.</h3>
+                    <h1 class="mb-5">로그인부터 해주세요.</h1>
                 </c:if>
                 <c:if test="${sessionScope.id != null}">
-                    <h3 class="mb-5">${sessionScope.id}님의 계정 관리</h3>
+                    <h1 class="mb-5">${sessionScope.id}님의 전화번호 변경</h1>
                 </c:if>
-                <c:if test="${message != null}">
-                    <h3 class="mb-5">${message}</h3>
-                </c:if>
+                <h3 class="mb-5">변경할 전화번호를 입력하세요.</h3>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <input type="button" value="계정 정보 보기" class="form-control form-control-lg" onclick="location.href='seeAccount'"><br>
-                <input type="button" value="계정 정보 수정" class="btn btn-block btn-lg btn-primary" onclick="location.href='updateAccount'"><br>
-                <input type="button" value="비밀번호 변경" class="form-control form-control-lg" onclick="location.href='pwdForm'"><br>
-                <input type="button" value="돌아가기" class="btn btn-block btn-lg btn-primary" onclick="location.href='main'">
+                <form method="post" action="changePhone">
+                    <div class="form-row">
+                        새로운 전화번호<input type="text" class="form-control form-control-lg" placeholder="010-XXXX-XXXX" name="newPhone"><br><br><br>
+                        <div class="col-5 col-md-6 mb-2 mb-md-0">
+                            <input type="submit" class="form-control form-control-lg" value="제출">
+                        </div>
+                        <div class="col-5 col-md-6 mb-2 mb-md-0">
+                            <input type="reset" class="btn btn-block btn-lg btn-primary" value="취소">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

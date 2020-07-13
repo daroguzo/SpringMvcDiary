@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Account Menu</title>
+    <title>계정 정보 보기</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,22 +42,21 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">Account Menu</h1>
+                <h1 class="mb-5">계정정보 보기</h1>
                 <c:if test="${sessionScope.id == null}">
                     <h3 class="mb-5">로그인부터 해주세요.</h3>
                 </c:if>
                 <c:if test="${sessionScope.id != null}">
-                    <h3 class="mb-5">${sessionScope.id}님의 계정 관리</h3>
-                </c:if>
-                <c:if test="${message != null}">
-                    <h3 class="mb-5">${message}</h3>
+                    <h3 class="mb-5">${sessionScope.id}님의 계정 정보</h3>
                 </c:if>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <input type="button" value="계정 정보 보기" class="form-control form-control-lg" onclick="location.href='seeAccount'"><br>
-                <input type="button" value="계정 정보 수정" class="btn btn-block btn-lg btn-primary" onclick="location.href='updateAccount'"><br>
-                <input type="button" value="비밀번호 변경" class="form-control form-control-lg" onclick="location.href='pwdForm'"><br>
-                <input type="button" value="돌아가기" class="btn btn-block btn-lg btn-primary" onclick="location.href='main'">
+                아이디: ${account.name}<br>
+                비밀번호: ${account.password}<br>
+                이름: ${account.userName}<br>
+                휴대전화 번호: ${account.phoneNumber}<br>
+                주소: ${account.address}<br>
+                <input type="button" value="메뉴로" class="btn btn-block btn-lg btn-primary" onclick="location.href='account'">
             </div>
         </div>
     </div>

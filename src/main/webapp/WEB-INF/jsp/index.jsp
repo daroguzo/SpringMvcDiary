@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Account Menu</title>
+    <title>My Diary</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,22 +42,26 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">Account Menu</h1>
-                <c:if test="${sessionScope.id == null}">
-                    <h3 class="mb-5">로그인부터 해주세요.</h3>
-                </c:if>
-                <c:if test="${sessionScope.id != null}">
-                    <h3 class="mb-5">${sessionScope.id}님의 계정 관리</h3>
-                </c:if>
-                <c:if test="${message != null}">
+                <h1 class="mb-5">Spring MVC Diary</h1>
+                <c:set var="msg" value="${message}"/>
+                <c:if test="${!empty msg}">
                     <h3 class="mb-5">${message}</h3>
+                </c:if>
+                <c:if test="${empty msg}">
+                    <h3 class="mb-5">환영합니다!</h3>
                 </c:if>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-                <input type="button" value="계정 정보 보기" class="form-control form-control-lg" onclick="location.href='seeAccount'"><br>
-                <input type="button" value="계정 정보 수정" class="btn btn-block btn-lg btn-primary" onclick="location.href='updateAccount'"><br>
-                <input type="button" value="비밀번호 변경" class="form-control form-control-lg" onclick="location.href='pwdForm'"><br>
-                <input type="button" value="돌아가기" class="btn btn-block btn-lg btn-primary" onclick="location.href='main'">
+                <form>
+                    <div class="form-row">
+                        <div class="col-5 col-md-6 mb-2 mb-md-0">
+                            <input type="button" class="form-control form-control-lg" value="로그인" onclick="location.href='loginForm'">
+                        </div>
+                        <div class="col-5 col-md-6 mb-2 mb-md-0">
+                            <button type="button" class="btn btn-block btn-lg btn-primary" value="회원가입" onclick="location.href='registerForm'">회원가입</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

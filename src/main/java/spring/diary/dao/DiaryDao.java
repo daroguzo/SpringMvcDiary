@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import spring.diary.dto.Account;
 import spring.diary.dto.Diary;
 
 import javax.sql.DataSource;
@@ -17,6 +18,10 @@ import java.util.List;
 public class DiaryDao {
     private JdbcTemplate jdbcTemplate;
 
+    public DiaryDao(DataSource dataSource){
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
+
     public void insert(final Diary newDiary) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(
@@ -24,12 +29,13 @@ public class DiaryDao {
                     @Override
                     public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
                         PreparedStatement pstmt = con.prepareStatement(
-                                "insert into diary (owner, name, content, date) values (?,?,?,?)",
+                                "insert into diary (owner, name, content, date, imageFile) values (?,?,?,?,?)",
                                 new String[]{"id"});
                         pstmt.setString(1, newDiary.getOwner());
                         pstmt.setString(2, newDiary.getName());
                         pstmt.setString(3, newDiary.getContent());
                         pstmt.setString(4, newDiary.getDate());
+                        pstmt.setString(5, newDiary.getImageFile());
                         return pstmt;
                     }
                 },
@@ -39,8 +45,8 @@ public class DiaryDao {
     }
 
     public void update(Diary diary){
-        jdbcTemplate.update("update diary set name = ?, content = ? where id = ?",
-                diary.getName(), diary.getContent(), diary.getId());
+        jdbcTemplate.update("update diary set name = ?, content = ?, imageFile = ? where id = ?",
+                diary.getName(), diary.getContent(), diary.getImageFile(), diary.getId());
 
     }
 
@@ -50,10 +56,6 @@ public class DiaryDao {
     }
 
 
-    public DiaryDao(DataSource dataSource){
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-
     public List<Diary> selectByOwner(String owner){
         List<Diary> results = jdbcTemplate.query("select * from diary where owner = ?",
                 new RowMapper<Diary>() {
@@ -62,7 +64,8 @@ public class DiaryDao {
                         Diary diary = new Diary(rs.getString("owner"),
                                 rs.getString("name"),
                                 rs.getString("content"),
-                                rs.getString("date"));
+                                rs.getString("date"),
+                                rs.getString("imageFile"));
                         diary.setId(rs.getLong("id"));
                         return diary;
                     }
@@ -77,7 +80,8 @@ public class DiaryDao {
                         Diary diary = new Diary(rs.getString("owner"),
                                 rs.getString("name"),
                                 rs.getString("content"),
-                                rs.getString("date"));
+                                rs.getString("date"),
+                                rs.getString("imageFile"));
                         diary.setId(rs.getLong("id"));
                         return diary;
                     }

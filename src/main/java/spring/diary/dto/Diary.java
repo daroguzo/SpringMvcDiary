@@ -12,15 +12,27 @@ public class Diary {
 
     private String date;
 
+    private String imageFile;
+
 
     public Diary() {
     }
 
-    public Diary(String owner, String name, String content, String date) {
+    public Diary(String owner, String name, String content, String date, String imageFile) {
         this.owner = owner;
         this.name = name;
         this.content = content;
         this.date = date;
+        this.imageFile = imageFile;
+    }
+
+    public Diary(Diary element){
+        this.id = element.id;
+        this.owner = element.owner;
+        this.name = element.name;
+        this.content = element.content;
+        this.date = element.date;
+        this.imageFile = element.imageFile;
     }
 
     public String getOwner() {
@@ -53,5 +65,13 @@ public class Diary {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(String imageFile) {
+        this.imageFile = imageFile;
     }
 }

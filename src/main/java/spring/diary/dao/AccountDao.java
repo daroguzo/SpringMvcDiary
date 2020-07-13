@@ -95,15 +95,4 @@ public class AccountDao {
                 });
         return count.get(0);
     }
-
-    public List<Account> selectAll(){
-        List<Account> results = jdbcTemplate.query("select * from account",
-                (ResultSet rs, int rowNum) -> {
-                    Account account = new Account(rs.getString("name"), rs.getString("password"),
-                            rs.getString("userName"), rs.getString("phoneNumber"), rs.getString("address"));
-                    account.setId(rs.getLong("id"));
-                    return account;
-                });
-        return results;
-    }
 }

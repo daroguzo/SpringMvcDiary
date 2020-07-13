@@ -3,6 +3,8 @@ package spring.diary.config;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import spring.diary.dao.AccountDao;
 import spring.diary.dao.DiaryDao;
 
@@ -31,5 +33,13 @@ public class JavaConfig {
     @Bean
     public DiaryDao diaryDao(){
         return new DiaryDao(dataSource());
+    }
+    @Bean
+    public MultipartResolver multipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxInMemorySize(31457280);
+        resolver.setMaxUploadSize(200000000);
+        resolver.setDefaultEncoding("utf-8");
+        return resolver;
     }
 }
